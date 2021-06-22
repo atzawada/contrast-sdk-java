@@ -29,40 +29,47 @@
 
 package com.contrastsecurity.models;
 
-
-import javax.xml.bind.DatatypeConverter;
-
 /**
- * Represents a primitive/object in a method invocation. The parameters,
- * "this", and return value are modeled with this object.
+ * Represents a primitive/object in a method invocation. The parameters, "this", and return value
+ * are modeled with this object.
+ *
+ * @deprecated because this object contains accessors for fields that can never be set. At best it's
+ *     not useful and at worst it produces {@code NullPointerException}. It was drafted 7 years ago
+ *     and never used.
  */
+@Deprecated
 public class CodeObject {
-    
-	/**
-	 * Return the identity hash code of this object.
-	 * @return the identity hash code of this object
-	 */
-    public String getHashCode() {
-        return hashCode;
-    }
-    private String hashCode;
 
-    /**
-     * Return whether or not the object is tracked.
-     * @return whether or not the object is tracked
-     */
-    public boolean isTracked() {
-        return tracked;
-    }
-    private boolean tracked;
+  /**
+   * Return the identity hash code of this object.
+   *
+   * @return the identity hash code of this object
+   */
+  public String getHashCode() {
+    return hashCode;
+  }
 
-    /**
-     * Return the value of the object.
-     *
-     * @return the value of the object
-     */
-    public String getValue() {
-        return DatatypeConverter.printBase64Binary(value.getBytes()).trim();
-    }
-    private String value;
+  private String hashCode;
+
+  /**
+   * Return whether or not the object is tracked.
+   *
+   * @return whether or not the object is tracked
+   */
+  public boolean isTracked() {
+    return tracked;
+  }
+
+  private boolean tracked;
+
+  /**
+   * Return the value of the object.
+   *
+   * @return the value of the object
+   */
+  public String getValue() {
+    throw new NullPointerException("value is always null");
+  }
+
+  private String value;
 }

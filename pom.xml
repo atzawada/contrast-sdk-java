@@ -10,7 +10,7 @@
 
     <groupId>com.contrastsecurity</groupId>
     <artifactId>contrast-sdk-java</artifactId>
-    <version>2.23-SNAPSHOT</version>
+    <version>3.1-SNAPSHOT</version>
 
     <organization>
         <name>Contrast Security</name>
@@ -81,21 +81,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.18</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.3.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -107,14 +93,6 @@
             </testResource>
         </testResources>
         <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-                <version>3.5.1</version>
-            </plugin>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
@@ -162,32 +140,32 @@
                   <execution>
                     <id>attach-sources</id>
                     <phase>package</phase>
-                    <goals><goal>jar-no-fork</goal></goals> 
+                    <goals><goal>jar-no-fork</goal></goals>
                   </execution>
                 </executions>
              </plugin>
-             <plugin> 
+             <plugin>
                <artifactId>maven-javadoc-plugin</artifactId>
                  <configuration>
                      <detectJavaApiLink>false</detectJavaApiLink>
                  </configuration>
-               <executions> 
-                 <execution> 
+               <executions>
+                 <execution>
                    <id>attach-javadocs</id>
                    <phase>package</phase>
-                   <goals><goal>jar</goal></goals> 
-                 </execution> 
-               </executions> 
+                   <goals><goal>jar</goal></goals>
+                 </execution>
+               </executions>
              </plugin>
-             <plugin> 
-                <artifactId>maven-deploy-plugin</artifactId> 
-                <executions> 
-                  <execution> 
+             <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                  <execution>
                     <id>deploy</id>
                     <phase>deploy</phase>
-                    <goals><goal>deploy</goal></goals> 
-                  </execution> 
-                </executions> 
+                    <goals><goal>deploy</goal></goals>
+                  </execution>
+                </executions>
             </plugin>
            <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -199,7 +177,50 @@
                   </excludes>
               </configuration>
          </plugin>
-      </plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+          <plugin>
+            <groupId>com.diffplug.spotless</groupId>
+            <artifactId>spotless-maven-plugin</artifactId>
+            <version>2.12.0</version>
+            <configuration>
+              <formats>
+                <format>
+                  <includes>
+                    <include>pom.xml</include>
+                    <include>README.md</include>
+                    <include>.github/workflows/**/*.yml</include>
+                    <include>src/**/*.java</include>
+                    <include>src/**/*.xml</include>
+                    <include>src/**/*.properties</include>
+                  </includes>
+                  <trimTrailingWhitespace />
+                  <endWithNewline />
+                </format>
+              </formats>
+              <java>
+                <googleJavaFormat>
+                  <version>1.9</version>
+                </googleJavaFormat>
+                <removeUnusedImports />
+              </java>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <phase>test-compile</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
     </build>
 
     <properties>

@@ -1,28 +1,58 @@
 package com.contrastsecurity.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TraceFilter {
 
-    public String getKeycode() {
-        return keycode;
-    }
+  public String getKeycode() {
+    return keycode;
+  }
 
-    private String keycode;
+  public void setKeycode(String keycode) {
+    this.keycode = keycode;
+  }
 
-    public String getLabel() {
-        return label;
-    }
+  private String keycode;
 
-    private String label;
+  public String getLabel() {
+    return label;
+  }
 
-    public Object getDetails() {
-        return details;
-    }
+  public void setLabel(String label) {
+    this.label = label;
+  }
 
-    private Object details;
+  private String label;
 
-    public long getCount() {
-        return count;
-    }
+  public Object getDetails() {
+    return details;
+  }
 
-    private long count;
+  private Object details;
+
+  public long getCount() {
+    return count;
+  }
+
+  public void setCount(int count) {
+    this.count = count;
+  }
+
+  private long count;
+
+  @SerializedName("new_group")
+  private boolean newGroup;
+
+  public boolean getNewGroup() {
+    return newGroup;
+  }
+
+  public void setNewGroup(boolean newGroup) {
+    this.newGroup = newGroup;
+  }
+
+  @Override
+  public String toString() {
+    return keycode;
+  }
 }
